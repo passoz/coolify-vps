@@ -45,7 +45,7 @@ omoweb.evolucsia.com {
     rate_limit {
         zone omo_auth {
             key {remote_host}
-            events 5
+            events 60
             window 1m
         }
     }
@@ -61,7 +61,7 @@ ocweb.evolucsia.com {
     rate_limit {
         zone oc_auth {
             key {remote_host}
-            events 5
+            events 60
             window 1m
         }
     }
