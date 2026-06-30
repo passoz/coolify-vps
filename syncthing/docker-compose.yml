@@ -1,0 +1,35 @@
+# Syncthing — Sincronização P2P
+# GUI acessível apenas via Tailnet (100.79.151.31:8384)
+# Sync ports: 22000/tcp+udp (dispositivos), 21027/udp (descoberta LAN)
+services:
+  syncthing:
+    image: syncthing/syncthing:latest
+    container_name: syncthing
+    restart: unless-stopped
+    hostname: vps
+    ports:
+      - "100.79.151.31:8384:8384"
+      - "22000:22000/tcp"
+      - "22000:22000/udp"
+      - "21027:21027/udp"
+    volumes:
+      - syncthing-config:/var/syncthing/config
+      - syncthing-data:/var/syncthing
+    environment:
+      - STGUIADDRESS=0.0.0.0:8384
+      - STGUIUSER=admin
+      - STGUIPASS=${STGUIPASS:-changeme}
+      - STNODEFAULTHOME=1
+    networks:
+      - web
+    labels:
+      - "app=syncthing"
+
+volumes:
+  syncthing-config:
+  syncthing-data:
+
+networks:
+  web:
+    name: web
+    external: true
