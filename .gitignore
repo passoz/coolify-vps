@@ -1,0 +1,20 @@
+# Caddy local data
+caddy/data/
+
+# Sensitive configs
+.htpasswd
+.env
+.env.local
+
+# HTML content IS the source (extracted from images, repos may be unavailable)
+# Tracked in git intentionally.
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

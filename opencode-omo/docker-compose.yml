@@ -1,0 +1,36 @@
+# OpenCode OMO — omoweb.evolucsia.com
+# Imagem real: g2wbydtk0e5pm8ogd41xhbjf:latest
+# Container atual: g2wbydtk0e5pm8ogd41xhbjf-004647438944
+# Portas internas: 4096 (web), 8080 (serve) — sem exposição externa, só via Caddy
+services:
+  opencode-omo:
+    image: g2wbydtk0e5pm8ogd41xhbjf:latest
+    container_name: opencode-omo
+    restart: unless-stopped
+    volumes:
+      - opencode-omo-root:/root
+      - opencode-omo-workspace:/workspace
+    environment:
+      - HOST=0.0.0.0
+      - PORT=4096
+      - OMO_MODE=omo-full
+      - OPENCODE_SERVER_HOSTNAME=0.0.0.0
+      - MISE_YES=1
+    networks:
+      - web
+    labels:
+      - "app=opencode-omo"
+      - "domain=omoweb.evolucsia.com"
+
+volumes:
+  opencode-omo-root:
+    name: opencode-omo-root
+    external: true
+  opencode-omo-workspace:
+    name: opencode-omo-workspace
+    external: true
+
+networks:
+  web:
+    name: web
+    external: true

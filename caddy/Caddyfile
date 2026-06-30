@@ -1,0 +1,93 @@
+# Caddyfile — Gateway principal
+# Substitui o Traefik do Coolify.
+# Certificados LetsEncrypt automáticos.
+
+{
+    admin off
+    # Rate limiting global (ordem e config)
+    order rate_limit before basicauth
+}
+
+# ── Home Assistant ──────────────────────────────────
+ha.evolucsia.com {
+    reverse_proxy home-assistant:8123
+    encode gzip zstd
+}
+
+# ── Aluxen ───────────────────────────────────────────
+aluxen.evolucsia.com {
+    reverse_proxy aluxen:3000
+    encode gzip zstd
+}
+
+# ── Evolucsia Site ───────────────────────────────────
+evolucsia.com {
+    redir https://www.evolucsia.com{uri} permanent
+}
+www.evolucsia.com {
+    reverse_proxy evolucsia-site:80
+    encode gzip zstd
+}
+
+# ── Paletto ──────────────────────────────────────────
+paletto.space {
+    reverse_proxy paletto:80
+    encode gzip zstd
+}
+
+# ── xkull Dashboard ─────────────────────────────────
+xkull.evolucsia.com {
+    reverse_proxy xkull-dashboard:80
+    encode gzip zstd
+}
+
+# ── OpenCode OMO (basic auth + rate limit) ──────────
+# Rate limit: 5 tentativas/min por IP, burst 10
+omoweb.evolucsia.com {
+    rate_limit {
+        zone omo_auth {
+            key {remote_host}
+            events 5
+            window 1m
+        }
+    }
+    basicauth {
+        passoz $2y$10$B1TtG31CCsTO3BZoVy6M0exT8vj3DImZTNbMjlZt3HSMR/fFTBK6m
+    }
+    reverse_proxy opencode-omo:4096
+    encode gzip zstd
+}
+
+# ── OpenCode Native (basic auth + rate limit) ───────
+# Rate limit: 5 tentativas/min por IP, burst 10
+ocweb.evolucsia.com {
+    rate_limit {
+        zone oc_auth {
+            key {remote_host}
+            events 5
+            window 1m
+        }
+    }
+    basicauth {
+        passoz $2y$10$y7mXbAIE7MYt9huCMH7Xu.8a65bNuHcoJn/FB32H8TsQwn6mBV2Vq
+    }
+    reverse_proxy opencode-native:4096
+    encode gzip zstd
+}
+
+# ── Odysseus ─────────────────────────────────────────
+odysseus.evolucsia.com {
+    reverse_proxy odysseus:7000
+    encode gzip zstd
+}
+
+# ── Navidrome ────────────────────────────────────────
+media.evolucsia.com {
+    reverse_proxy navidrome:4533
+    encode gzip zstd
+}
+
+# ── Healthcheck ──────────────────────────────────────
+healthz.evolucsia.com {
+    respond 200 "ok"
+}

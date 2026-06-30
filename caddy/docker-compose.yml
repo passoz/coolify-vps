@@ -1,0 +1,29 @@
+# Caddy — Gateway reverso (substitui o Traefik do Coolify)
+# Gerencia TLS automaticamente via LetsEncrypt.
+# Rede: web (criada externamente, compartilhada com serviços que forem migrados)
+services:
+  caddy:
+    image: caddy:alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - web
+    labels:
+      - "app=caddy"
+      - "tier=gateway"
+
+volumes:
+  caddy-data:
+  caddy-config:
+
+networks:
+  web:
+    name: web
+    external: true

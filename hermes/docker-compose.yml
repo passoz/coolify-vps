@@ -1,0 +1,48 @@
+# Hermes — Aplicação Docker
+# Imagem real: ghcr.io/passoz/hermes:latest
+# Container atual: dr1r3nmuuiaucs3t25zk2t2c-172843244150
+# Portas publicadas: 2222→22 (SSH), 9119→9119 (gateway)
+services:
+  hermes:
+    image: ghcr.io/passoz/hermes:latest
+    container_name: hermes
+    restart: unless-stopped
+    ports:
+      - "2222:22"
+      - "9119:9119"
+    volumes:
+      - hermes-state:/root/.hermes
+      - hermes-workspace:/root/workspace
+      - hermes-context:/root/context
+      - hermes-data:/opt/data
+    environment:
+      - TZ=America/Sao_Paulo
+      - HERMES_HOME=/root/.hermes
+      - HERMES_STATE_DIR=/root/.hermes
+      - HERMES_WORKSPACE_DIR=/root/workspace
+      - HERMES_CONTEXT_DIR=/root/context
+      - HERMES_ALLOW_ROOT_GATEWAY=1
+    networks:
+      - web
+    labels:
+      - "app=hermes"
+      - "domain=hermes.evolucsia.com"
+
+volumes:
+  hermes-state:
+    name: dr1r3nmuuiaucs3t25zk2t2c-hermes-state
+    external: true
+  hermes-workspace:
+    name: dr1r3nmuuiaucs3t25zk2t2c-hermes-workspace
+    external: true
+  hermes-context:
+    name: dr1r3nmuuiaucs3t25zk2t2c-hermes-context
+    external: true
+  hermes-data:
+    name: 8bee9ed51b949d7b80a2809d1c17010f301d6b4efb884c3eff5efbf779d3784f
+    external: true
+
+networks:
+  web:
+    name: web
+    external: true

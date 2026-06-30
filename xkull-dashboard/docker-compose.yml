@@ -1,0 +1,25 @@
+# xkull Dashboard — Site Estático com Autenticação Basic
+# Domínio: https://xkull.evolucsia.com
+# Imagem: nginx:alpine
+# Container atual: j5uevdeapf06dyeotn1vnf6n-230910169523
+# Volumes reais: bind mounts para diretório de deployment do Coolify
+services:
+  xkull-dashboard:
+    image: nginx:alpine
+    container_name: xkull-dashboard
+    restart: unless-stopped
+    volumes:
+      # Bind mounts para os arquivos do site (dados gerenciados pelo Coolify)
+      - /data/coolify/applications/j5uevdeapf06dyeotn1vnf6n/usr/share/nginx/html:/usr/share/nginx/html:ro
+      - /data/coolify/applications/j5uevdeapf06dyeotn1vnf6n/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /data/coolify/applications/j5uevdeapf06dyeotn1vnf6n/etc/nginx/.htpasswd:/etc/nginx/.htpasswd:ro
+    networks:
+      - web
+    labels:
+      - "app=xkull-dashboard"
+      - "domain=xkull.evolucsia.com"
+
+networks:
+  web:
+    name: web
+    external: true

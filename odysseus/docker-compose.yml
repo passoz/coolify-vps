@@ -1,0 +1,97 @@
+# Odysseus — Stack de IA/Pesquisa
+# Domínio (app): https://odysseus.evolucsia.com
+# Repositório original: /opt/odysseus/
+#
+# Serviços internos (searxng, chromadb, ntfy) ficam só na rede 'odysseus'.
+# O app 'odysseus' fica também na rede 'web' para o Caddy rotear.
+services:
+  odysseus:
+    image: odysseus-odysseus
+    container_name: odysseus-odysseus
+    restart: unless-stopped
+    ports:
+      - "7000:7000"
+    volumes:
+      - /opt/odysseus/data/local:/app/.local
+      - /opt/odysseus/data/app:/app/data
+      - /opt/odysseus/data/logs:/app/logs
+      - /opt/odysseus/data/ssh:/app/.ssh
+      - /opt/odysseus/data/huggingface:/app/.cache/huggingface
+    environment:
+      - ALLOWED_ORIGINS=https://odysseus.evolucsia.com,http://localhost,http://127.0.0.1
+      - SEARXNG_INSTANCE=http://searxng:8080
+      - CHROMADB_HOST=chromadb
+      - CHROMADB_PORT=8000
+      - DATABASE_URL=sqlite:///./data/app.db
+      - SECURE_COOKIES=true
+      - CLEANUP_INTERVAL_HOURS=24
+      - ODYSSEUS_INPROCESS_TASKS=1
+      - ODYSSEUS_INPROCESS_POLLERS=1
+    depends_on:
+      - searxng
+      - chromadb
+      - ntfy
+    networks:
+      - odysseus
+      - web
+    labels:
+      - "app=odysseus"
+      - "domain=odysseus.evolucsia.com"
+
+  searxng:
+    image: docker.io/searxng/searxng:2026.5.31-7159b8aed
+    container_name: odysseus-searxng
+    restart: unless-stopped
+    volumes:
+      - searxng-data:/etc/searxng
+      - searxng-cache:/var/cache/searxng
+      - /opt/odysseus/config/searxng/settings.yml:/tmp/searxng-settings.yml.template:ro
+    environment:
+      - SEARXNG_BASE_URL=http://searxng:8080/
+    networks:
+      - odysseus
+
+  chromadb:
+    image: docker.io/chromadb/chroma:latest
+    container_name: odysseus-chromadb
+    restart: unless-stopped
+    volumes:
+      - chromadb-data:/chroma/chroma
+    environment:
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - odysseus
+
+  ntfy:
+    image: docker.io/binwiederhier/ntfy
+    container_name: odysseus-ntfy
+    restart: unless-stopped
+    volumes:
+      - ntfy-cache:/var/cache/ntfy
+    environment:
+      - NTFY_BASE_URL=http://ntfy:80
+    command: ["serve"]
+    networks:
+      - odysseus
+
+volumes:
+  searxng-data:
+    name: odysseus_searxng-data
+    external: true
+  searxng-cache:
+    name: 019646640b1d8e6a65b26fe5c65214202ec758d0dabc8888d851f749f76c218a
+    external: true
+  chromadb-data:
+    name: odysseus_chromadb-data
+    external: true
+  ntfy-cache:
+    name: odysseus_ntfy-cache
+    external: true
+
+networks:
+  odysseus:
+    # Rede interna — NÃO external (será criada automaticamente)
+    # Se o stack atual roda na rede 'coolify', esta nova rede isola o stack.
+  web:
+    name: web
+    external: true

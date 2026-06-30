@@ -1,0 +1,20 @@
+# Paletto — Site Estático
+# Domínio: https://paletto.space
+# Build: Dockerfile local (não depende mais da imagem do Coolify)
+# Repositório: github.com/passoz/paletto
+services:
+  paletto:
+    build: .
+    image: paletto:latest
+    container_name: paletto
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "app=paletto"
+      - "domain=paletto.space"
+
+networks:
+  web:
+    name: web
+    external: true

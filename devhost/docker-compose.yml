@@ -1,0 +1,41 @@
+# DevHost — Ambiente de Desenvolvimento SSH
+# Porta SSH: 3322→22
+# Imagem real: e2068gphegei3by0ny5v7uft:latest
+# Container atual: e2068gphegei3by0ny5v7uft-214037429117
+services:
+  devhost:
+    image: e2068gphegei3by0ny5v7uft:latest
+    container_name: devhost
+    restart: unless-stopped
+    ports:
+      - "3322:22"
+    volumes:
+      - devhost-home:/home/passoz
+      - devhost-ssh:/etc/ssh
+      - devhost-tailscale:/var/lib/tailscale
+    environment:
+      - PORT=22
+      - HOST=0.0.0.0
+      - SSH_PORT=22
+      - TAILSCALE_HOSTNAME=coolify-dev
+    networks:
+      - web
+    labels:
+      - "app=devhost"
+      - "type=dev-environment"
+
+volumes:
+  devhost-home:
+    name: e2068gphegei3by0ny5v7uft-passoz-home
+    external: true
+  devhost-ssh:
+    name: e2068gphegei3by0ny5v7uft-ssh
+    external: true
+  devhost-tailscale:
+    name: e2068gphegei3by0ny5v7uft-tailscale-state
+    external: true
+
+networks:
+  web:
+    name: web
+    external: true

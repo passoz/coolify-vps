@@ -1,0 +1,32 @@
+# Aluxen — Aplicação Next.js
+# Domínio: https://aluxen.evolucsia.com
+# Imagem real: ghcr.io/passoz/aluxen:latest
+# Container atual: b35ezft6m5fdtxn7sotu7gfk-110454907255
+# OBS: Container atual NÃO publica porta no host. Caddy roteia via rede 'web'.
+services:
+  aluxen:
+    image: ghcr.io/passoz/aluxen:latest
+    container_name: aluxen
+    restart: unless-stopped
+    volumes:
+      - aluxen-data:/data
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3000
+      - DB_DIR=/data
+    networks:
+      - web
+    labels:
+      - "app=aluxen"
+      - "domain=aluxen.evolucsia.com"
+
+volumes:
+  aluxen-data:
+    name: b35ezft6m5fdtxn7sotu7gfk-aluxen-data
+    external: true
+
+networks:
+  web:
+    name: web
+    external: true

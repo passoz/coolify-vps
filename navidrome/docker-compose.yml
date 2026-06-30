@@ -1,0 +1,38 @@
+# Navidrome — Streaming de Música
+# Domínio: https://media.evolucsia.com
+# Imagem real: deluan/navidrome:latest
+# Container atual: navidrome-dopv100qpem5f8urzah1dfo3
+# Volumes reais: bind mounts (não são volumes nomeados)
+#   /home/ubuntu/navidrome-media → /music  (músicas)
+#   /data/coolify/services/dopv100qpem5f8urzah1dfo3/data → /data  (config)
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    ports:
+      - "4533:4533"
+    volumes:
+      - /home/ubuntu/navidrome-media:/music:ro
+      - /data/coolify/services/dopv100qpem5f8urzah1dfo3/data:/data
+    environment:
+      - ND_LOGLEVEL=info
+      - ND_SESSIONTIMEOUT=24h
+      - ND_BASEURL=https://media.evolucsia.com
+      - ND_MUSICFOLDER=/music
+      - ND_DATAFOLDER=/data
+      - ND_PORT=4533
+      - ND_SCANSCHEDULE=1h
+      - ND_ENABLEINSIGHTSCOLLECTOR=false
+      - ND_ENABLEWEBPENCODING=true
+      - ND_CONFIGFILE=/data/navidrome.toml
+    networks:
+      - web
+    labels:
+      - "app=navidrome"
+      - "domain=media.evolucsia.com"
+
+networks:
+  web:
+    name: web
+    external: true

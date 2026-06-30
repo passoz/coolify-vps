@@ -1,0 +1,31 @@
+#!/bin/sh
+set -eu
+CONFIG_DIR="/root/.config/opencode"
+OPENCODE_CONFIG="$CONFIG_DIR/opencode.json"
+OMO_CONFIG="$CONFIG_DIR/oh-my-openagent.json"
+OMO_DEFAULTS="/etc/opencode/oh-my-openagent.defaults.json"
+MODE_FILE="$CONFIG_DIR/oh-my-openagent.mode"
+
+mode="${OMO_MODE:-native}"
+
+if [ "$mode" = "native" ]; then
+  mkdir -p "$CONFIG_DIR"
+  if [ -f "$OPENCODE_CONFIG" ]; then
+    jq 'if (.plugin|type) == "array" then .plugin = (.plugin | map(select(. != "oh-my-openagent"))) else . end' "$OPENCODE_CONFIG" > "$OPENCODE_CONFIG.tmp" && mv "$OPENCODE_CONFIG.tmp" "$OPENCODE_CONFIG"
+  fi
+  rm -f "$OMO_CONFIG" "$MODE_FILE"
+  exit 0
+fi
+
+if [ "$mode" = "omo-full" ]; then
+  mkdir -p "$CONFIG_DIR"
+  if [ ! -f "$OPENCODE_CONFIG" ]; then
+    echo '{"plugin":[]}' > "$OPENCODE_CONFIG"
+  fi
+  jq '. as $root | .plugin = (if ($root.plugin|type) == "array" then (.plugin + ["oh-my-openagent"]|unique) else ["oh-my-openagent"] end)' "$OPENCODE_CONFIG" > "$OPENCODE_CONFIG.tmp" && mv "$OPENCODE_CONFIG.tmp" "$OPENCODE_CONFIG"
+  if [ ! -f "$OMO_CONFIG" ]; then
+    cp "$OMO_DEFAULTS" "$OMO_CONFIG"
+  fi
+  jq --argjson rp true '.sisyphus_agent = ((.sisyphus_agent//{}) + {"disabled":false,"default_builder_enabled":false,"planner_enabled":true,"replace_plan":$rp})' "$OMO_CONFIG" > "$OMO_CONFIG.tmp" && mv "$OMO_CONFIG.tmp" "$OMO_CONFIG"
+  echo "$mode" > "$MODE_FILE"
+fi

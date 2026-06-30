@@ -1,0 +1,20 @@
+# Evolucsia Site — Site Principal
+# Domínio: https://evolucsia.com
+# Build: Dockerfile local (não depende mais da imagem do Coolify)
+# Repositório: github.com/passoz/evolucsia
+services:
+  evolucsia-site:
+    build: .
+    image: evolucsia-site:latest
+    container_name: evolucsia-site
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "app=evolucsia-site"
+      - "domain=evolucsia.com"
+
+networks:
+  web:
+    name: web
+    external: true

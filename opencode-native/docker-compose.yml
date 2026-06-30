@@ -1,0 +1,36 @@
+# OpenCode Native — ocweb.evolucsia.com
+# Imagem real: rblvxrpir3b3ydpxi7qg1czh:latest
+# Container atual: rblvxrpir3b3ydpxi7qg1czh-003849583999
+# Portas internas: 4096 (web), 8080 (serve) — sem exposição externa, só via Caddy
+services:
+  opencode-native:
+    image: rblvxrpir3b3ydpxi7qg1czh:latest
+    container_name: opencode-native
+    restart: unless-stopped
+    volumes:
+      - opencode-root:/root
+      - opencode-workspace:/workspace
+    environment:
+      - HOST=0.0.0.0
+      - PORT=4096
+      - OMO_MODE=native
+      - OPENCODE_SERVER_HOSTNAME=0.0.0.0
+      - MISE_YES=1
+    networks:
+      - web
+    labels:
+      - "app=opencode-native"
+      - "domain=ocweb.evolucsia.com"
+
+volumes:
+  opencode-root:
+    name: opencode-root
+    external: true
+  opencode-workspace:
+    name: opencode-workspace
+    external: true
+
+networks:
+  web:
+    name: web
+    external: true
