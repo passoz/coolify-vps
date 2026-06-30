@@ -4,6 +4,7 @@
 
 {
     admin off
+    order rate_limit before basicauth
 }
 
 # ── Home Assistant ──────────────────────────────────
@@ -39,8 +40,15 @@ xkull.evolucsia.com {
     encode gzip zstd
 }
 
-# ── OpenCode OMO (basic auth) ───────────────────────
+# ── OpenCode OMO (basic auth + rate limit) ──────────
 omoweb.evolucsia.com {
+    rate_limit {
+        zone omo_auth {
+            key {remote_host}
+            events 5
+            window 1m
+        }
+    }
     basicauth {
         passoz $2y$10$B1TtG31CCsTO3BZoVy6M0exT8vj3DImZTNbMjlZt3HSMR/fFTBK6m
     }
@@ -48,8 +56,15 @@ omoweb.evolucsia.com {
     encode gzip zstd
 }
 
-# ── OpenCode Native (basic auth) ────────────────────
+# ── OpenCode Native (basic auth + rate limit) ───────
 ocweb.evolucsia.com {
+    rate_limit {
+        zone oc_auth {
+            key {remote_host}
+            events 5
+            window 1m
+        }
+    }
     basicauth {
         passoz $2y$10$y7mXbAIE7MYt9huCMH7Xu.8a65bNuHcoJn/FB32H8TsQwn6mBV2Vq
     }

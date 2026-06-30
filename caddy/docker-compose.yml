@@ -3,7 +3,8 @@
 # Rede: web (criada externamente, compartilhada com serviços que forem migrados)
 services:
   caddy:
-    image: caddy:alpine
+    build: .
+    image: caddy-rate-limit:latest
     container_name: caddy
     restart: unless-stopped
     ports:
