@@ -45,8 +45,8 @@ omoweb.evolucsia.com {
     rate_limit {
         zone omo_auth {
             key {remote_host}
-            events 60
-            window 1m
+                events 300
+                window 1m
         }
     }
     basicauth {
@@ -61,7 +61,7 @@ ocweb.evolucsia.com {
     rate_limit {
         zone oc_auth {
             key {remote_host}
-            events 60
+            events 300
             window 1m
         }
     }
@@ -75,6 +75,12 @@ ocweb.evolucsia.com {
 # ── Odysseus ─────────────────────────────────────────
 odysseus.evolucsia.com {
     reverse_proxy odysseus:7000
+    encode gzip zstd
+}
+
+# ── WebPI ─────────────────────────────────────────────
+webpi.evolucsia.com {
+    reverse_proxy webpi:3000
     encode gzip zstd
 }
 

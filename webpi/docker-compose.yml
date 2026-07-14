@@ -1,0 +1,21 @@
+# WebPI — Aplicação Go
+# Domínio: https://webpi.evolucsia.com
+# Imagem: ghcr.io/passoz/webpi:latest
+services:
+  webpi:
+    image: ghcr.io/passoz/webpi:latest
+    container_name: webpi
+    restart: unless-stopped
+    environment:
+      - ADMIN_EMAIL=admin@webpi.local
+      - ADMIN_PASSWORD=admin123
+    networks:
+      - web
+    labels:
+      - "app=webpi"
+      - "domain=webpi.evolucsia.com"
+
+networks:
+  web:
+    name: web
+    external: true
