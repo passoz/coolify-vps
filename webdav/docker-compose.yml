@@ -5,9 +5,9 @@ services:
     image: hacdias/webdav:latest
     container_name: webdav-obsidian
     restart: unless-stopped
-    command: ["--config", "/config.yaml"]
+    command: ["--config", "/config.json"]
     volumes:
-      - ./config.yaml:/config.yaml:ro
+      - ./config.json:/config.json:ro
       - obsidian-data:/data
     networks:
       - web

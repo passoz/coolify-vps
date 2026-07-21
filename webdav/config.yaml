@@ -1,8 +1,0 @@
-address: 0.0.0.0
-port: 80
-scope: /data
-modify: true
-rules: []
-users:
-  - username: passoz
-    password: '$2a$10$9BiJKKTgQlGONRZAB9jQGeWwyy25mFMVLRHq5pIcaNZ6OWw4EBRgG'
