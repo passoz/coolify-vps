@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.2** | 20/07/2026 | Antigravity | Proteção do `ntfy` com autenticação nativa obrigatória e documentação de gerenciamento de usuários. |
 | **1.1** | 20/07/2026 | Antigravity | Adição do serviço global `ntfy` integrado ao Caddy. |
 | **1.0** | 20/07/2026 | Antigravity | Versão inicial consolidada reunindo levantamento, análise de builds e plano de ação. |
 
@@ -145,6 +146,39 @@ O Caddy utiliza a imagem buildada localmente com suporte ao módulo `ratelimit`.
    cd /home/passoz/dev/coolify-vps/<servico>
    docker compose up -d
    ```
+
+### 4.3 Gerenciamento de Autenticação e Usuários no `ntfy`
+Por padrão, o `ntfy` aceita requisições anônimas. Para mitigar a exposição, a autenticação foi ativada (`NTFY_AUTH_DEFAULT_ACCESS=deny-all`). 
+
+* **Usuário Administrador Padrão Criado:**
+  * **Usuário:** `passoz`
+  * **Senha Inicial:** `fb77dc0d57433bb8581e2ff5` (Mude assim que possível usando o comando de alteração de senha abaixo).
+
+* **Como criar um novo usuário:**
+  ```bash
+  # Criar usuário normal (sem privilégios administrativos)
+  docker exec -it ntfy ntfy user add <username>
+  
+  # Criar usuário administrador
+  docker exec -it ntfy ntfy user add --role=admin <username>
+  ```
+  *(O terminal solicitará a senha de forma interativa. Em scripts, use a variável `NTFY_PASSWORD=suasenha` antes do comando).*
+
+* **Como alterar a senha de um usuário existente:**
+  ```bash
+  docker exec -it ntfy ntfy user change-password <username>
+  ```
+
+* **Como conceder permissões específicas a tópicos (se usar a política `deny-all` ou `write-only`):**
+  ```bash
+  # Dar permissão de escrita e leitura em um tópico específico para um usuário comum
+  docker exec -it ntfy ntfy access <username> <topic-name> read-write
+  ```
+
+* **Como publicar mensagens autenticadas via curl:**
+  ```bash
+  curl -u "passoz:fb77dc0d57433bb8581e2ff5" -d "Mensagem de teste" https://ntfy.evolucsia.com/seu-topico
+  ```
 
 ---
 
