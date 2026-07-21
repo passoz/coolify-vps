@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.6** | 20/07/2026 | Antigravity | Adição do serviço `files-webdav` (files.evolucsia.com) e guia de conexão Nautilus. |
 | **1.5** | 20/07/2026 | Antigravity | Atualização de senhas para todos os serviços (`ntfy`, `obsidian`, `calendar`). |
 | **1.4** | 20/07/2026 | Antigravity | Adição dos serviços `radicale` (calendário) e `webdav` (Obsidian sync). |
 | **1.3** | 20/07/2026 | Antigravity | Configuração do gateway upstream (`ntfy.sh`) para permitir push instantâneo no iOS/Android. |
@@ -54,6 +55,7 @@ A tabela abaixo descreve todos os serviços declarados neste repositório, seus 
 | **ntfy** | `ntfy` | `80` | `ntfy-cache`, `ntfy-config` | `binwiederhier/ntfy:latest` |
 | **Radicale** | `calendar` | `5232` | `radicale-data` | `kozea/radicale:latest` |
 | **WebDAV** | `obsidian` | `80` | `obsidian-data` | `hacdias/webdav:latest` |
+| **WebDAV (Files)** | `files` | `80` | `files-data` | `hacdias/webdav:latest` |
 | **WebPI** | `webpi` | `3000` | Sem volumes declarados | `ghcr.io/passoz/webpi` |
 | **Syncthing** | (GUI apenas via Tailnet) | `8384` | `syncthing-config`, `syncthing-data` | `syncthing/syncthing` |
 
@@ -213,6 +215,22 @@ O WebDAV (`hacdias/webdav`) está configurado para salvar os dados no volume `ob
      * **Username:** `passoz`
      * **Password:** `Dt32btop@`
   4. Clique em **Check Connection** para validar.
+
+### 4.6 Configuração do Files Sync (WebDAV) no Nautilus / GNOME Files
+O serviço `files.evolucsia.com` é um servidor WebDAV genérico para armazenamento de arquivos e sincronização com desktops (Linux/Nautilus, Mac/Finder, Windows).
+* **Credenciais de Acesso:**
+  * **Usuário:** `passoz`
+  * **Senha Inicial:** `Dt32btop@`
+* **Conexão no Nautilus (GNOME Files):**
+  1. Abra o gerenciador de arquivos **Nautilus**.
+  2. Na barra lateral esquerda, clique em **Outros locais** (*Other Locations*).
+  3. No rodapé, no campo **Conectar ao servidor** (*Connect to Server*), digite:
+     ```text
+     davs://files.evolucsia.com
+     ```
+  4. Clique em **Conectar**.
+  5. Insira o usuário (`passoz`) e a senha (`Dt32btop@`), selecione "Lembrar senha para sempre" e clique em **Conectar**.
+  6. A pasta aparecerá como um drive de rede montado na barra lateral.
 
 ---
 

@@ -1,0 +1,14 @@
+{
+  "address": "0.0.0.0",
+  "port": 80,
+  "directory": "/data",
+  "modify": true,
+  "rules": [],
+  "users": [
+    {
+      "username": "passoz",
+      "password": "{bcrypt}$2a$10$YtYbDzXEGz74TEFWbNmwQOuRpIHcTZICZLejDBv3EB46K7nfO8v.y",
+      "directory": "/data"
+    }
+  ]
+}

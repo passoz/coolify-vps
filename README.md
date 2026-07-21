@@ -24,6 +24,7 @@ as **mesmas configurações** caso precisem ser restartados ou recriados.
 | `ntfy/` | ntfy.evolucsia.com | Go (ntfy) | 80 | ntfy-cache, ntfy-config |
 | `radicale/` | calendar.evolucsia.com | Python (Radicale) | 5232 | radicale-data |
 | `webdav/` | obsidian.evolucsia.com | Go (WebDAV) | 80 | obsidian-data |
+| `files/` | files.evolucsia.com | Go (WebDAV) | 80 | files-data |
 | `opencode-omo/` | omoweb.evolucsia.com | OpenCode | 4096 | `opencode-omo-root` (ext) |
 | `opencode-native/` | ocweb.evolucsia.com | OpenCode | 4096 | `opencode-root` (ext) |
 | `odysseus/` | odysseus.evolucsia.com | FastAPI + SearXNG + ChromaDB | 7000 | 4 volumes (ext) |
@@ -75,6 +76,7 @@ consegue rotear pelo nome do serviço.
 | ntfy (global) | Compose (ntfy/) | web | — |
 | Radicale (Calendário) | Compose (radicale/) | web | — |
 | WebDAV (Obsidian) | Compose (webdav/) | web | — |
+| WebDAV (Files) | Compose (files/) | web | — |
 
 ## 🔧 Comandos Úteis
 

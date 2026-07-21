@@ -1,0 +1,25 @@
+# WebDAV — Servidor para Sincronização de Arquivos Gerais (Nautilus, etc.)
+# Domínio: https://files.evolucsia.com
+services:
+  files-webdav:
+    image: hacdias/webdav:latest
+    container_name: files-webdav
+    restart: unless-stopped
+    command: ["--config", "/config.json"]
+    volumes:
+      - ./config.json:/config.json:ro
+      - files-data:/data
+    networks:
+      - web
+    labels:
+      - "app=files-webdav"
+      - "domain=files.evolucsia.com"
+
+volumes:
+  files-data:
+    name: files-data
+
+networks:
+  web:
+    name: web
+    external: true
