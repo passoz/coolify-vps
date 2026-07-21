@@ -1,0 +1,32 @@
+# ntfy — Serviço de Notificações Push
+# Domínio: https://ntfy.evolucsia.com
+# Stack: Go / ntfy
+services:
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    container_name: ntfy
+    restart: unless-stopped
+    command: ["serve"]
+    environment:
+      - NTFY_BASE_URL=https://ntfy.evolucsia.com
+      - NTFY_BEHIND_PROXY=true
+      - NTFY_ATTACHMENT_LIMIT=15M
+    volumes:
+      - ntfy-cache:/var/cache/ntfy
+      - ntfy-config:/etc/ntfy
+    networks:
+      - web
+    labels:
+      - "app=ntfy"
+      - "domain=ntfy.evolucsia.com"
+
+volumes:
+  ntfy-cache:
+    name: ntfy-cache
+  ntfy-config:
+    name: ntfy-config
+
+networks:
+  web:
+    name: web
+    external: true

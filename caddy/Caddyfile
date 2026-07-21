@@ -90,6 +90,11 @@ media.evolucsia.com {
     encode gzip zstd
 }
 
+# ── ntfy ─────────────────────────────────────────────
+ntfy.evolucsia.com {
+    reverse_proxy ntfy:80
+}
+
 # ── Healthcheck ──────────────────────────────────────
 healthz.evolucsia.com {
     respond 200 "ok"
