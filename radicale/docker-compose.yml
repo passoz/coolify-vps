@@ -5,6 +5,7 @@ services:
     image: kozea/radicale:latest
     container_name: radicale
     restart: unless-stopped
+    user: "0:0"
     volumes:
       - ./config:/etc/radicale/config:ro
       - ./users:/etc/radicale/users:ro
