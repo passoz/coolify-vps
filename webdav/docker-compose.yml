@@ -6,8 +6,6 @@ services:
     container_name: webdav-obsidian
     restart: unless-stopped
     command: ["--config", "/config.json"]
-    environment:
-      - WD_SCOPE=/data
     volumes:
       - ./config.json:/config.json:ro
       - obsidian-data:/data
