@@ -5,4 +5,4 @@ modify: true
 rules: []
 users:
   - username: passoz
-    password: '$2a$10$G3txb3Hmlx7RoqgTxar2mOLTWFS2XuYARZGUQzCeqOvbrCKn/uWWS'
+    password: '$2a$10$lit4OUeDTjHoOvrJIroQDuPl5pVHbzPOSF3SXq9ya7ye7SeRJrG5S'
