@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.3** | 20/07/2026 | Antigravity | Configuração do gateway upstream (`ntfy.sh`) para permitir push instantâneo no iOS/Android. |
 | **1.2** | 20/07/2026 | Antigravity | Proteção do `ntfy` com autenticação nativa obrigatória e documentação de gerenciamento de usuários. |
 | **1.1** | 20/07/2026 | Antigravity | Adição do serviço global `ntfy` integrado ao Caddy. |
 | **1.0** | 20/07/2026 | Antigravity | Versão inicial consolidada reunindo levantamento, análise de builds e plano de ação. |

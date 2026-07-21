@@ -13,6 +13,7 @@ services:
       - NTFY_ATTACHMENT_LIMIT=15M
       - NTFY_AUTH_FILE=/var/cache/ntfy/user.db
       - NTFY_AUTH_DEFAULT_ACCESS=deny-all
+      - NTFY_UPSTREAM_BASE_URL=https://ntfy.sh
     volumes:
       - ntfy-cache:/var/cache/ntfy
       - ntfy-config:/etc/ntfy
