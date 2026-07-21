@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.5** | 20/07/2026 | Antigravity | Atualização de senhas para todos os serviços (`ntfy`, `obsidian`, `calendar`). |
 | **1.4** | 20/07/2026 | Antigravity | Adição dos serviços `radicale` (calendário) e `webdav` (Obsidian sync). |
 | **1.3** | 20/07/2026 | Antigravity | Configuração do gateway upstream (`ntfy.sh`) para permitir push instantâneo no iOS/Android. |
 | **1.2** | 20/07/2026 | Antigravity | Proteção do `ntfy` com autenticação nativa obrigatória e documentação de gerenciamento de usuários. |
@@ -156,7 +157,7 @@ Por padrão, o `ntfy` aceita requisições anônimas. Para mitigar a exposição
 
 * **Usuário Administrador Padrão Criado:**
   * **Usuário:** `passoz`
-  * **Senha Inicial:** `fb77dc0d57433bb8581e2ff5` (Mude assim que possível usando o comando de alteração de senha abaixo).
+  * **Senha Inicial:** `Dt32btop@` (Mude assim que possível usando o comando de alteração de senha abaixo).
 
 * **Como criar um novo usuário:**
   ```bash
@@ -181,21 +182,21 @@ Por padrão, o `ntfy` aceita requisições anônimas. Para mitigar a exposição
 
 * **Como publicar mensagens autenticadas via curl:**
   ```bash
-  curl -u "passoz:fb77dc0d57433bb8581e2ff5" -d "Mensagem de teste" https://ntfy.evolucsia.com/seu-topico
+  curl -u "passoz:Dt32btop@" -d "Mensagem de teste" https://ntfy.evolucsia.com/seu-topico
   ```
 
 ### 4.4 Configuração do Calendário (Radicale) nos Clientes
 O Radicale está protegido por autenticação bcrypt.
 * **Credenciais de Acesso:**
   * **Usuário:** `passoz`
-  * **Senha Inicial:** `cd5a295e08fda4997dd28102`
+  * **Senha Inicial:** `Dt32btop@`
 * **Configuração no iOS (iPhone):**
   1. Vá em **Ajustes** -> **Calendário** -> **Contas** -> **Adicionar Conta**.
   2. Escolha **Outra** -> **Adicionar Conta CalDAV**.
   3. Preencha os campos:
      * **Servidor:** `calendar.evolucsia.com`
      * **Usuário:** `passoz`
-     * **Senha:** `cd5a295e08fda4997dd28102`
+     * **Senha:** `Dt32btop@`
      * **Descrição:** Calendário Evolucsia
   4. O iOS verificará o domínio e começará a sincronizar automaticamente.
 
@@ -203,14 +204,14 @@ O Radicale está protegido por autenticação bcrypt.
 O WebDAV (`hacdias/webdav`) está configurado para salvar os dados no volume `obsidian-data`.
 * **Credenciais de Acesso:**
   * **Usuário:** `passoz`
-  * **Senha Inicial:** `b3815a31fd8e145eddd9616a`
+  * **Senha Inicial:** `Dt32btop@`
 * **Configuração no Obsidian (Plugin `Remotely Save`):**
   1. No Obsidian (mobile ou desktop), instale o plugin comunitário **Remotely Save**.
   2. Nas opções do plugin, defina o método como **WebDAV**.
   3. Preencha as credenciais:
      * **WebDAV URL:** `https://obsidian.evolucsia.com/`
      * **Username:** `passoz`
-     * **Password:** `b3815a31fd8e145eddd9616a`
+     * **Password:** `Dt32btop@`
   4. Clique em **Check Connection** para validar.
 
 ---
