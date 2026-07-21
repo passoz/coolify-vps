@@ -1,0 +1,25 @@
+# Radicale — Servidor CalDAV/CardDAV (Calendário e Contatos)
+# Domínio: https://calendar.evolucsia.com
+services:
+  radicale:
+    image: kozea/radicale:latest
+    container_name: radicale
+    restart: unless-stopped
+    volumes:
+      - ./config:/etc/radicale/config:ro
+      - ./users:/etc/radicale/users:ro
+      - radicale-data:/data
+    networks:
+      - web
+    labels:
+      - "app=radicale"
+      - "domain=calendar.evolucsia.com"
+
+volumes:
+  radicale-data:
+    name: radicale-data
+
+networks:
+  web:
+    name: web
+    external: true

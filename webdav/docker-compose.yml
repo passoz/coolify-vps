@@ -1,0 +1,24 @@
+# WebDAV — Servidor para Sincronização do Obsidian
+# Domínio: https://obsidian.evolucsia.com
+services:
+  webdav:
+    image: hacdias/webdav:latest
+    container_name: webdav-obsidian
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/config.yaml:ro
+      - obsidian-data:/data
+    networks:
+      - web
+    labels:
+      - "app=webdav-obsidian"
+      - "domain=obsidian.evolucsia.com"
+
+volumes:
+  obsidian-data:
+    name: obsidian-data
+
+networks:
+  web:
+    name: web
+    external: true

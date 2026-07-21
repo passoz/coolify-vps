@@ -95,6 +95,18 @@ ntfy.evolucsia.com {
     reverse_proxy ntfy:80
 }
 
+# ── Calendário (Radicale) ────────────────────────────
+calendar.evolucsia.com {
+    reverse_proxy radicale:5232
+    encode gzip zstd
+}
+
+# ── Obsidian Sync (WebDAV) ───────────────────────────
+obsidian.evolucsia.com {
+    reverse_proxy webdav:80
+    encode gzip zstd
+}
+
 # ── Healthcheck ──────────────────────────────────────
 healthz.evolucsia.com {
     respond 200 "ok"
