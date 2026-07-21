@@ -7,7 +7,8 @@
   "users": [
     {
       "username": "passoz",
-      "password": "b3815a31fd8e145eddd9616a"
+      "password": "$2a$10$3jEQ9/tZ8yC2vd8eFRC8FuqhdvOFmN0ducp85HwOfG3bYxoseSNvy",
+      "scope": "/data"
     }
   ]
 }
