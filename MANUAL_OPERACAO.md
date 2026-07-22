@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.8** | 20/07/2026 | Antigravity | Registro da paralisação da stack `odysseus`. |
 | **1.7** | 20/07/2026 | Antigravity | Ajuste de permissões do Radicale (`type = authenticated`) para viabilizar autodescoberta dos clientes CalDAV. |
 | **1.6** | 20/07/2026 | Antigravity | Adição do serviço `files-webdav` (files.evolucsia.com) e guia de conexão Nautilus. |
 | **1.5** | 20/07/2026 | Antigravity | Atualização de senhas para todos os serviços (`ntfy`, `obsidian`, `calendar`). |
@@ -50,7 +51,7 @@ A tabela abaixo descreve todos os serviços declarados neste repositório, seus 
 | **xkull Dashboard** | `xkull` | `80` | Bind mounts do Coolify (precisa desacoplar) | `nginx:alpine` |
 | **OpenCode OMO** | `omoweb` | `4096`, `8080` | `opencode-omo-root`, `opencode-omo-workspace` | Build local (`OMO_MODE=omo-full`) |
 | **OpenCode Native** | `ocweb` | `4096`, `8080` | `opencode-root`, `opencode-workspace` | Build local (`OMO_MODE=native`) |
-| **Odysseus Stack** | `odysseus` | `7000` | Local em `/opt/odysseus/` + 4 volumes nomeados | Imagem local/pública |
+| **Odysseus Stack** | `odysseus` | `7000` | Local em `/opt/odysseus/` + 4 volumes nomeados | Imagem local/pública (❌ Parado) |
 | **DevHost** | `coolify-dev` (Tailnet) | `22` (SSHD) | `devhost-home`, `devhost-ssh`, `devhost-tailscale` | Build local (Ubuntu 24.04) |
 | **Navidrome** | `media` | `4533` | Binds: `/home/ubuntu/navidrome-media`, `/data/coolify/services/dopv100qpem5f8urzah1dfo3/data` | `deluan/navidrome` |
 | **ntfy** | `ntfy` | `80` | `ntfy-cache`, `ntfy-config` | `binwiederhier/ntfy:latest` |

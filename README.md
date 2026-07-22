@@ -72,7 +72,7 @@ consegue rotear pelo nome do serviço.
 | Navidrome | Coolify | dopv100... | Traefik |
 | OpenCode OMO | Coolify | coolify | Traefik |
 | OpenCode Native | Coolify | coolify | Traefik |
-| Odysseus + SearXNG + ChromaDB + ntfy | Compose (odysseus/) | odysseus | — |
+| Odysseus + SearXNG + ChromaDB + ntfy | Compose (odysseus/) | — | ❌ Parado |
 | ntfy (global) | Compose (ntfy/) | web | — |
 | Radicale (Calendário) | Compose (radicale/) | web | — |
 | WebDAV (Obsidian) | Compose (webdav/) | web | — |
