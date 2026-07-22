@@ -8,3 +8,6 @@ htpasswd_encryption = bcrypt
 
 [storage]
 filesystem_folder = /data
+
+[rights]
+type = authenticated

@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.7** | 20/07/2026 | Antigravity | Ajuste de permissões do Radicale (`type = authenticated`) para viabilizar autodescoberta dos clientes CalDAV. |
 | **1.6** | 20/07/2026 | Antigravity | Adição do serviço `files-webdav` (files.evolucsia.com) e guia de conexão Nautilus. |
 | **1.5** | 20/07/2026 | Antigravity | Atualização de senhas para todos os serviços (`ntfy`, `obsidian`, `calendar`). |
 | **1.4** | 20/07/2026 | Antigravity | Adição dos serviços `radicale` (calendário) e `webdav` (Obsidian sync). |
