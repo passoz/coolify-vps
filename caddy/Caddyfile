@@ -92,6 +92,9 @@ media.evolucsia.com {
 
 # ── ntfy ─────────────────────────────────────────────
 ntfy.evolucsia.com {
+    basicauth {
+        passoz $2a$14$SQ7niLTdy0Xk4jEUP82GUuFvO4BQ7kYDYRi522EZN3BzWfSw7WkJu
+    }
     reverse_proxy ntfy:80
 }
 
