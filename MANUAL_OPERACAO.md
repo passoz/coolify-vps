@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.10** | 20/07/2026 | Antigravity | Correção das permissões de escrita dos serviços WebDAV (`permissions: "crud"`). |
 | **1.9** | 20/07/2026 | Antigravity | Adição de camada de Basic Auth no Caddy para ocultar e proteger a página web do `ntfy`. |
 | **1.8** | 20/07/2026 | Antigravity | Registro da paralisação da stack `odysseus`. |
 | **1.7** | 20/07/2026 | Antigravity | Ajuste de permissões do Radicale (`type = authenticated`) para viabilizar autodescoberta dos clientes CalDAV. |
