@@ -116,6 +116,11 @@ files.evolucsia.com {
     encode gzip zstd
 }
 
+# ── 9router (Tailnet Secure) ─────────────────────────
+vps.elf-platy.ts.net {
+    reverse_proxy 9router:20128
+}
+
 # ── Healthcheck ──────────────────────────────────────
 healthz.evolucsia.com {
     respond 200 "ok"

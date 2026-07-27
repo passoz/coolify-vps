@@ -1,0 +1,19 @@
+# 9router — CLI / Gateway
+# Domínio seguro (Tailscale): https://vps.elf-platy.ts.net
+services:
+  9router:
+    build: .
+    container_name: 9router
+    restart: unless-stopped
+    volumes:
+      - /home/ubuntu/.9router:/root/.9router
+    networks:
+      - web
+    labels:
+      - "app=9router"
+      - "domain=vps.elf-platy.ts.net"
+
+networks:
+  web:
+    name: web
+    external: true

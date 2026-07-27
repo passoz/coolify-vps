@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.11** | 20/07/2026 | Antigravity | Implantação do serviço `9router` restrito à Tailnet (vps.elf-platy.ts.net) via Caddy TLS. |
 | **1.10** | 20/07/2026 | Antigravity | Correção das permissões de escrita dos serviços WebDAV (`permissions: "crud"`). |
 | **1.9** | 20/07/2026 | Antigravity | Adição de camada de Basic Auth no Caddy para ocultar e proteger a página web do `ntfy`. |
 | **1.8** | 20/07/2026 | Antigravity | Registro da paralisação da stack `odysseus`. |
@@ -60,6 +61,7 @@ A tabela abaixo descreve todos os serviços declarados neste repositório, seus 
 | **Radicale** | `calendar` | `5232` | `radicale-data` | `kozea/radicale:latest` |
 | **WebDAV** | `obsidian` | `80` | `obsidian-data` | `hacdias/webdav:latest` |
 | **WebDAV (Files)** | `files` | `80` | `files-data` | `hacdias/webdav:latest` |
+| **9router** | `vps.elf-platy.ts.net` (Tailscale) | `20128` | `/home/ubuntu/.9router` | Build local (Node 22-slim) |
 | **WebPI** | `webpi` | `3000` | Sem volumes declarados | `ghcr.io/passoz/webpi` |
 | **Syncthing** | (GUI apenas via Tailnet) | `8384` | `syncthing-config`, `syncthing-data` | `syncthing/syncthing` |
 
@@ -235,6 +237,14 @@ O serviço `files.evolucsia.com` é um servidor WebDAV genérico para armazename
   4. Clique em **Conectar**.
   5. Insira o usuário (`passoz`) e a senha (`Dt32btop@`), selecione "Lembrar senha para sempre" e clique em **Conectar**.
   6. A pasta aparecerá como um drive de rede montado na barra lateral.
+
+### 4.7 Configuração e Uso do `9router` (Restrito à Tailnet)
+O serviço `9router` está configurado para rodar na VPS de forma **totalmente privada**, isolado da internet pública.
+* **Segurança na Rede:** O contêiner do `9router` não publica nenhuma porta física no host (removido `network_mode: "host"`). Ele está anexado à rede virtual `web` do Docker.
+* **Caddy Tailnet Integration:** O Caddy faz o proxy do tráfego sob o domínio da Tailscale **`vps.elf-platy.ts.net`** na porta `443` segura. O Caddy se conecta ao socket local do daemon do Tailscale (`/var/run/tailscale/tailscaled.sock`) para validar e obter certificados SSL automaticamente (Tailscale HTTPS).
+* **Acesso:** O painel do `9router` só pode ser aberto por navegadores rodando em máquinas conectadas na mesma Tailnet.
+  * **Endereço de Acesso:** `https://vps.elf-platy.ts.net/`
+  * **Configurações Sincronizadas:** As configurações locais (`~/.9router/`) foram integralmente migradas para `/home/ubuntu/.9router` no servidor, mantendo as credenciais de banco, logs e ID da máquina idênticos aos de origem.
 
 ---
 
