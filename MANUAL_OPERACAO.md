@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.32** | 20/07/2026 | Antigravity | Resolução dos links simbólicos do `pi-global` transformando todas as 18 skills em diretórios físicos sincronizados com a VPS. |
 | **1.31** | 20/07/2026 | Antigravity | Sincronização e vinculação completa do `pi-global` e `opencode-global` para o usuário `passoz` na VPS, registrando o `9router` (138 modelos) como provider em ambos. |
 | **1.30** | 20/07/2026 | Antigravity | Desativação da rota e do domínio `webpi.evolucsia.com`. Mantida exclusivamente a rota `terminal.evolucsia.com`. |
 | **1.29** | 20/07/2026 | Antigravity | Configuração da fonte do Web Terminal para `Mononoki Nerd Font Mono`. |
