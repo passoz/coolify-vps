@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.13** | 20/07/2026 | Antigravity | Isenção da rota `/assets/*` da autenticação BasicAuth do Caddy no OpenCode para permitir o carregamento dinâmico de módulos JS pelo navegador. |
 | **1.12** | 20/07/2026 | Antigravity | Migração do `9router` para rede `web` (bridge mode). Atualização dos OpenCodes para 1.18.5 com proxy de API via `9router`. |
 | **1.11** | 20/07/2026 | Antigravity | Implantação do serviço `9router` em host mode com Tailscale interno. |
 | **1.10** | 20/07/2026 | Antigravity | Correção das permissões de escrita dos serviços WebDAV (`permissions: "crud"`). |
