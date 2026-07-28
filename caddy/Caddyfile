@@ -49,8 +49,8 @@ omoweb.evolucsia.com {
             window 1m
         }
     }
-    @assets path /assets/* /site.webmanifest /favicon* *.css *.js *.png *.svg *.ico *.woff2
-    handle @assets {
+    @omo_assets path /assets/* /site.webmanifest /favicon* *.css *.js *.png *.svg *.ico *.woff2
+    handle @omo_assets {
         reverse_proxy opencode-omo:4096
     }
     handle {
@@ -71,8 +71,8 @@ ocweb.evolucsia.com {
             window 1m
         }
     }
-    @assets path /assets/* /site.webmanifest /favicon* *.css *.js *.png *.svg *.ico *.woff2
-    handle @assets {
+    @oc_assets path /assets/* /site.webmanifest /favicon* *.css *.js *.png *.svg *.ico *.woff2
+    handle @oc_assets {
         reverse_proxy opencode-native:4096
     }
     handle {
