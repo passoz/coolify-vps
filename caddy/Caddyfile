@@ -91,7 +91,7 @@ odysseus.evolucsia.com {
 }
 
 # ── Web Terminal SSH (ttyd for passoz) ───────────────
-terminal.evolucsia.com, webpi.evolucsia.com {
+terminal.evolucsia.com {
     rate_limit {
         zone terminal_auth {
             key {remote_host}
