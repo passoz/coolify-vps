@@ -118,7 +118,7 @@ O compose atual aponta para o diretório interno do Coolify. Para remover a depe
 
 1. Acesse o servidor e crie um diretório de arquivos locais no repositório:
    ```bash
-   cd /home/passoz/dev/coolify-vps/xkull-dashboard
+   cd /home/passoz/dev/vps/xkull-dashboard
    mkdir -p html conf
    ```
 2. Copie os arquivos existentes do Coolify para a nova estrutura local:
@@ -159,7 +159,7 @@ O Caddy utiliza a imagem buildada localmente com suporte ao módulo `ratelimit`.
 
 * **Reiniciar Caddy / Aplicar novo Caddyfile sem downtime:**
   ```bash
-  cd /home/passoz/dev/coolify-vps/caddy
+  cd /home/passoz/dev/vps/caddy
   docker compose exec -w /etc/caddy caddy caddy reload
   ```
 * **Verificar logs em tempo real (essencial para debugar erros de SSL ou rotas):**
@@ -178,7 +178,7 @@ O Caddy utiliza a imagem buildada localmente com suporte ao módulo `ratelimit`.
 4. **Adicione a rota correspondente no `caddy/Caddyfile`** e recarregue o Caddy (`caddy reload`).
 5. **Suba o contêiner via docker compose**:
    ```bash
-   cd /home/passoz/dev/coolify-vps/<servico>
+   cd /home/passoz/dev/vps/<servico>
    docker compose up -d
    ```
 
@@ -334,7 +334,7 @@ A segurança atual depende inteiramente das regras de entrada da Oracle Cloud (V
 
 ## 6. Políticas de Backup e Recuperação
 
-### 6.1 Backup das Configurações (`coolify-vps`)
+### 6.1 Backup das Configurações (`vps`)
 Todo o estado de configuração da infraestrutura de contêineres está neste repositório. Faça commits frequentes e envie para o repositório remoto:
 ```bash
 git add .

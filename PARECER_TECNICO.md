@@ -7,7 +7,7 @@
 
 ## 1. Visão Geral do Repositório
 
-O repositório `/home/passoz/dev/coolify-vps` centraliza as configurações de Docker Compose e Dockerfiles para gerenciar de forma independente os serviços hospedados na VPS da Oracle Cloud (`us-amd-01`).
+O repositório `/home/passoz/dev/vps` centraliza as configurações de Docker Compose e Dockerfiles para gerenciar de forma independente os serviços hospedados na VPS da Oracle Cloud (`us-amd-01`).
 
 A estratégia de migração do Coolify para Compose está bem delineada, focando em:
 1. **Preservação de Dados:** Utilização de volumes externos pré-existentes (`external: true`) criados originalmente pelo Coolify.
