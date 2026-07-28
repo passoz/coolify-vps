@@ -92,6 +92,13 @@ odysseus.evolucsia.com {
 
 # ── Web Terminal SSH (ttyd for passoz) ───────────────
 terminal.evolucsia.com, webpi.evolucsia.com {
+    rate_limit {
+        zone terminal_auth {
+            key {remote_host}
+            events 300
+            window 1m
+        }
+    }
     basicauth {
         passoz $2a$14$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
     }
