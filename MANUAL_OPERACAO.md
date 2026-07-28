@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.18** | 20/07/2026 | Antigravity | Migração do `hermes` do Coolify para Docker Compose e atualização para a versão mais recente (`ghcr.io/passoz/hermes:latest`). |
 | **1.17** | 20/07/2026 | Antigravity | Mapeamento direto das portas do host `7000-7020` para o `omoweb` (`opencode-omo`). |
 | **1.16** | 20/07/2026 | Antigravity | Configuração do range compartilhado `7000-7020` via subnet route da Tailnet (`10.0.4.0/24`) para `omoweb` (10.0.4.15) e `ocweb` (10.0.4.16). |
 | **1.15** | 20/07/2026 | Antigravity | Liberação do range de portas de desenvolvimento no host: `7000-7020` para `omoweb` e `7021-7041` para `ocweb`. |
