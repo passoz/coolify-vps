@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.28** | 20/07/2026 | Antigravity | Adição de camada de proteção de Rate Limit (máximo 300 eventos/minuto por IP) para o Web Terminal (`terminal.evolucsia.com` / `webpi.evolucsia.com`). |
 | **1.27** | 20/07/2026 | Antigravity | Atualização do hash bcrypt no Caddy (`caddy hash-password`), liberando a autenticação por senha unificada (`Dt32btop@`) para `webpi.evolucsia.com` e `terminal.evolucsia.com`. |
 | **1.26** | 20/07/2026 | Antigravity | Substituição do `webpi` pelo terminal Web SSH nativo (`ttyd` + `xterm.js`) para o usuário `passoz` via HTTPS seguro com Caddy BasicAuth (`webpi.evolucsia.com` / `terminal.evolucsia.com` e Tailnet `:7681`). |
 | **1.25** | 20/07/2026 | Antigravity | Instalação do Neovim 0.12.4 via `mise` e implantação do LunarVim (`lvim`) para o usuário `passoz`. |
