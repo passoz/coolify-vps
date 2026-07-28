@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.31** | 20/07/2026 | Antigravity | Sincronização e vinculação completa do `pi-global` e `opencode-global` para o usuário `passoz` na VPS, registrando o `9router` (138 modelos) como provider em ambos. |
 | **1.30** | 20/07/2026 | Antigravity | Desativação da rota e do domínio `webpi.evolucsia.com`. Mantida exclusivamente a rota `terminal.evolucsia.com`. |
 | **1.29** | 20/07/2026 | Antigravity | Configuração da fonte do Web Terminal para `Mononoki Nerd Font Mono`. |
 | **1.28** | 20/07/2026 | Antigravity | Adição de camada de proteção de Rate Limit (máximo 300 eventos/minuto por IP) para o Web Terminal (`terminal.evolucsia.com` / `webpi.evolucsia.com`). |
