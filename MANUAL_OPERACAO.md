@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.17** | 20/07/2026 | Antigravity | Mapeamento direto das portas do host `7000-7020` para o `omoweb` (`opencode-omo`). |
 | **1.16** | 20/07/2026 | Antigravity | Configuração do range compartilhado `7000-7020` via subnet route da Tailnet (`10.0.4.0/24`) para `omoweb` (10.0.4.15) e `ocweb` (10.0.4.16). |
 | **1.15** | 20/07/2026 | Antigravity | Liberação do range de portas de desenvolvimento no host: `7000-7020` para `omoweb` e `7021-7041` para `ocweb`. |
 | **1.14** | 20/07/2026 | Antigravity | Sincronização completa de configs, `AGENTS.md`, prompts, skills, temas e plugins do `opencode-global` para o `omoweb` e `ocweb`. |
