@@ -55,7 +55,7 @@ omoweb.evolucsia.com {
     }
     handle {
         basicauth {
-            passoz $$2a$$14$$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
+            passoz $2a$14$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
         }
         reverse_proxy opencode-omo:4096
     }
@@ -77,7 +77,7 @@ ocweb.evolucsia.com {
     }
     handle {
         basicauth {
-            passoz $$2a$$14$$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
+            passoz $2a$14$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
         }
         reverse_proxy opencode-native:4096
     }
@@ -93,7 +93,7 @@ odysseus.evolucsia.com {
 # ── Web Terminal SSH (ttyd for passoz) ───────────────
 terminal.evolucsia.com, webpi.evolucsia.com {
     basicauth {
-        passoz $$2a$$14$$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
+        passoz $2a$14$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
     }
     reverse_proxy 10.0.4.1:7681
     encode gzip zstd
@@ -108,7 +108,7 @@ media.evolucsia.com {
 # ── ntfy ─────────────────────────────────────────────
 ntfy.evolucsia.com {
     basicauth {
-        passoz $$2a$$14$$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
+        passoz $2a$14$tkL9dDN8vZIstt.P4mjVMeTArOyPN4Tvw4euUX81Z3VkH/O20HpT6
     }
     reverse_proxy ntfy:80
 }
