@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.27** | 20/07/2026 | Antigravity | Atualização do hash bcrypt no Caddy (`caddy hash-password`), liberando a autenticação por senha unificada (`Dt32btop@`) para `webpi.evolucsia.com` e `terminal.evolucsia.com`. |
 | **1.26** | 20/07/2026 | Antigravity | Substituição do `webpi` pelo terminal Web SSH nativo (`ttyd` + `xterm.js`) para o usuário `passoz` via HTTPS seguro com Caddy BasicAuth (`webpi.evolucsia.com` / `terminal.evolucsia.com` e Tailnet `:7681`). |
 | **1.25** | 20/07/2026 | Antigravity | Instalação do Neovim 0.12.4 via `mise` e implantação do LunarVim (`lvim`) para o usuário `passoz`. |
 | **1.24** | 20/07/2026 | Antigravity | Criação do usuário `passoz` no host VPS com privilégios `sudo` e `docker`, `zsh`, `oh-my-zsh` (tema `fishy`), `zsh-autosuggestions`, `zsh-syntax-highlighting`, `mise` e `gh` CLI. |
