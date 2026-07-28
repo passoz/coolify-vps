@@ -5,8 +5,8 @@ services:
     image: opencode-omo:latest
     container_name: opencode-omo
     restart: unless-stopped
-    expose:
-      - "7000-7020"
+    ports:
+      - "7000-7020:7000-7020"
     volumes:
       - opencode-omo-root:/root
       - opencode-omo-workspace:/workspace
