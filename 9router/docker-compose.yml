@@ -3,8 +3,16 @@ services:
     build: .
     container_name: 9router
     restart: unless-stopped
-    network_mode: "host"
     tty: true
     stdin_open: true
+    ports:
+      - "20128:20128"
     volumes:
       - /home/ubuntu/.9router:/root/.9router
+    networks:
+      - web
+
+networks:
+  web:
+    name: web
+    external: true
