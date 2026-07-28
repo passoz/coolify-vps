@@ -62,14 +62,6 @@ omoweb.evolucsia.com {
     encode gzip zstd
 }
 
-*.omoweb.evolucsia.com {
-    @omo_port header_regexp host Host ^(70[0-2][0-9])\.omoweb\.evolucsia\.com$
-    handle @omo_port {
-        reverse_proxy opencode-omo:{re.host.1}
-    }
-    encode gzip zstd
-}
-
 # ── OpenCode Native (basic auth + rate limit) ───────
 ocweb.evolucsia.com {
     rate_limit {
@@ -88,14 +80,6 @@ ocweb.evolucsia.com {
             passoz $2y$10$y7mXbAIE7MYt9huCMH7Xu.8a65bNuHcoJn/FB32H8TsQwn6mBV2Vq
         }
         reverse_proxy opencode-native:4096
-    }
-    encode gzip zstd
-}
-
-*.ocweb.evolucsia.com {
-    @oc_port header_regexp host Host ^(70[0-2][0-9])\.ocweb\.evolucsia\.com$
-    handle @oc_port {
-        reverse_proxy opencode-native:{re.host.1}
     }
     encode gzip zstd
 }
