@@ -25,7 +25,7 @@ as **mesmas configurações** caso precisem ser restartados ou recriados.
 | `radicale/` | calendar.evolucsia.com | Python (Radicale) | 5232 | radicale-data |
 | `webdav/` | obsidian.evolucsia.com | Go (WebDAV) | 80 | obsidian-data |
 | `files/` | files.evolucsia.com | Go (WebDAV) | 80 | files-data |
-| `9router/` | (Tailscale interno) | Node (9router) | 20128 | /home/ubuntu/.9router |
+| `9router/` | `9router` | Node (9router) | 20128 | /home/ubuntu/.9router |
 | `opencode-omo/` | omoweb.evolucsia.com | OpenCode | 4096 | `opencode-omo-root` (ext) |
 | `opencode-native/` | ocweb.evolucsia.com | OpenCode | 4096 | `opencode-root` (ext) |
 | `odysseus/` | odysseus.evolucsia.com | FastAPI + SearXNG + ChromaDB | 7000 | 4 volumes (ext) |
@@ -78,7 +78,7 @@ consegue rotear pelo nome do serviço.
 | Radicale (Calendário) | Compose (radicale/) | web | — |
 | WebDAV (Obsidian) | Compose (webdav/) | web | — |
 | WebDAV (Files) | Compose (files/) | web | — |
-| 9router | Compose (9router/) | host | — |
+| 9router | Compose (9router/) | web | — |
 
 ## 🔧 Comandos Úteis
 

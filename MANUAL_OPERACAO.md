@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.12** | 20/07/2026 | Antigravity | Migração do `9router` para rede `web` (bridge mode). Atualização dos OpenCodes para 1.18.5 com proxy de API via `9router`. |
 | **1.11** | 20/07/2026 | Antigravity | Implantação do serviço `9router` em host mode com Tailscale interno. |
 | **1.10** | 20/07/2026 | Antigravity | Correção das permissões de escrita dos serviços WebDAV (`permissions: "crud"`). |
 | **1.9** | 20/07/2026 | Antigravity | Adição de camada de Basic Auth no Caddy para ocultar e proteger a página web do `ntfy`. |
@@ -61,7 +62,7 @@ A tabela abaixo descreve todos os serviços declarados neste repositório, seus 
 | **Radicale** | `calendar` | `5232` | `radicale-data` | `kozea/radicale:latest` |
 | **WebDAV** | `obsidian` | `80` | `obsidian-data` | `hacdias/webdav:latest` |
 | **WebDAV (Files)** | `files` | `80` | `files-data` | `hacdias/webdav:latest` |
-| **9router** | (Tailscale interno) | `20128` | `/home/ubuntu/.9router` | Build local (Node 22-slim) em host mode |
+| **9router** | `9router` | `20128` | `/home/ubuntu/.9router` | Build local (Node 22-slim) na rede `web` |
 | **WebPI** | `webpi` | `3000` | Sem volumes declarados | `ghcr.io/passoz/webpi` |
 | **Syncthing** | (GUI apenas via Tailnet) | `8384` | `syncthing-config`, `syncthing-data` | `syncthing/syncthing` |
 
@@ -238,11 +239,13 @@ O serviço `files.evolucsia.com` é um servidor WebDAV genérico para armazename
   5. Insira o usuário (`passoz`) e a senha (`Dt32btop@`), selecione "Lembrar senha para sempre" e clique em **Conectar**.
   6. A pasta aparecerá como um drive de rede montado na barra lateral.
 
-### 4.7 Configuração e Uso do `9router` (Tailscale Interno)
-O serviço `9router` está configurado para rodar na VPS utilizando o recurso de **Tailscale integrado internamente** no próprio serviço, sem intermediação do Caddy.
-* **Segurança na Rede:** O contêiner roda em `network_mode: "host"`, permitindo que ele gerencie a conexão de rede e se registre nativamente como um nó na sua Tailnet. Ele não está exposto publicamente pelo Caddy.
-* **Configurações Sincronizadas:** As configurações locais (`~/.9router/`) foram migradas para `/home/ubuntu/.9router` na VPS, preservando a identidade, banco de dados e segredos da máquina.
-* **Ativação da Tailnet:** A configuração da conexão interna do Tailscale no `9router` será realizada manualmente conforme necessário diretamente nas interfaces internas/CLI do serviço.
+### 4.7 Configuração e Uso do `9router`
+O serviço `9router` é um proxy de chaves de API para LLMs. Ele roda na rede `web` do Docker e está acessível de outros contêineres via `http://9router:20128`.
+* **Rede:** Rede `web` do Docker (bridge mode). Porta `20128` mapeada para o host.
+* **Configurações:** `/home/ubuntu/.9router` na VPS (migrado do local).
+* **API Key:** Chave criada para acesso remoto dos contêineres: `sk-9router-E8EDDFB8B2B3377CC5C21390809BF40E`
+* **Uso pelos OpenCodes:** Ambos os contêineres `opencode-omo` e `opencode-native` estão configurados para usar o `9router` como proxy de API, roteando todas as chamadas LLM através dele.
+* **Dashboard:** Acessível em `http://localhost:20128` a partir do host.
 
 ---
 
