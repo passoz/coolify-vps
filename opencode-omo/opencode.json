@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "oh-my-openagent"
+  ],
+  "provider": {
+    "9router": {
+      "name": "9router Proxy",
+      "npm": "@ai-sdk/openai",
+      "options": {
+        "baseURL": "http://9router:20128/v1",
+        "apiKey": "sk-9router-E8EDDFB8B2B3377CC5C21390809BF40E"
+      }
+    }
+  }
+}

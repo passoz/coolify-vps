@@ -8,20 +8,29 @@ MODE_FILE="$CONFIG_DIR/oh-my-openagent.mode"
 
 mode="${OMO_MODE:-native}"
 
+mkdir -p "$CONFIG_DIR"
+
+if [ ! -f "$OPENCODE_CONFIG" ]; then
+  echo '{"plugin":[],"provider":{}}' > "$OPENCODE_CONFIG"
+fi
+
+# Ensure 9router provider is registered in opencode.json
+jq '.provider = (.provider // {}) | .provider["9router"] = {
+  "name": "9router Proxy",
+  "npm": "@ai-sdk/openai",
+  "options": {
+    "baseURL": "http://9router:20128/v1",
+    "apiKey": "sk-9router-E8EDDFB8B2B3377CC5C21390809BF40E"
+  }
+}' "$OPENCODE_CONFIG" > "$OPENCODE_CONFIG.tmp" && mv "$OPENCODE_CONFIG.tmp" "$OPENCODE_CONFIG"
+
 if [ "$mode" = "native" ]; then
-  mkdir -p "$CONFIG_DIR"
-  if [ -f "$OPENCODE_CONFIG" ]; then
-    jq 'if (.plugin|type) == "array" then .plugin = (.plugin | map(select(. != "oh-my-openagent"))) else . end' "$OPENCODE_CONFIG" > "$OPENCODE_CONFIG.tmp" && mv "$OPENCODE_CONFIG.tmp" "$OPENCODE_CONFIG"
-  fi
+  jq 'if (.plugin|type) == "array" then .plugin = (.plugin | map(select(. != "oh-my-openagent"))) else . end' "$OPENCODE_CONFIG" > "$OPENCODE_CONFIG.tmp" && mv "$OPENCODE_CONFIG.tmp" "$OPENCODE_CONFIG"
   rm -f "$OMO_CONFIG" "$MODE_FILE"
   exit 0
 fi
 
 if [ "$mode" = "omo-full" ]; then
-  mkdir -p "$CONFIG_DIR"
-  if [ ! -f "$OPENCODE_CONFIG" ]; then
-    echo '{"plugin":[]}' > "$OPENCODE_CONFIG"
-  fi
   jq '. as $root | .plugin = (if ($root.plugin|type) == "array" then (.plugin + ["oh-my-openagent"]|unique) else ["oh-my-openagent"] end)' "$OPENCODE_CONFIG" > "$OPENCODE_CONFIG.tmp" && mv "$OPENCODE_CONFIG.tmp" "$OPENCODE_CONFIG"
   if [ ! -f "$OMO_CONFIG" ]; then
     cp "$OMO_DEFAULTS" "$OMO_CONFIG"
