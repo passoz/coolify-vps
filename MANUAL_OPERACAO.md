@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.21** | 20/07/2026 | Antigravity | Varredura de integridade e instalação das dependências Python essenciais para as skills do Hermes (`pillow`, `requests`, `google-api-python-client`, `pymupdf`, `youtube-transcript-api`, `rich`, `fire`, etc.). |
 | **1.20** | 20/07/2026 | Antigravity | Instalação dos pacotes Python `caldav` e `icalendar` no ambiente do Hermes e inclusão de mecanismo de auto-instalação resiliente nos scripts de notificação. |
 | **1.19** | 20/07/2026 | Antigravity | Recuperação e restauração do token de acesso de longa duração do Home Assistant e credenciais do CalDAV para o Hermes. |
 | **1.18** | 20/07/2026 | Antigravity | Migração do `hermes` do Coolify para Docker Compose e atualização para a versão mais recente (`ghcr.io/passoz/hermes:latest`). |
