@@ -11,7 +11,7 @@ ENV PATH=/root/.local/bin:/root/.local/share/mise/shims:/usr/local/sbin:/usr/loc
 ARG OPENCODE_GH_TOKEN
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl git gh jq openssh-client tini \
+    ca-certificates curl git gh jq openssh-client tini libatomic1 build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl https://mise.jdx.dev/install.sh | HOME=/image-root sh
