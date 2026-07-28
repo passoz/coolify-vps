@@ -12,6 +12,7 @@
 
 | Versão | Data | Autor | Descrição das Alterações |
 | :--- | :--- | :--- | :--- |
+| **1.30** | 20/07/2026 | Antigravity | Desativação da rota e do domínio `webpi.evolucsia.com`. Mantida exclusivamente a rota `terminal.evolucsia.com`. |
 | **1.29** | 20/07/2026 | Antigravity | Configuração da fonte do Web Terminal para `Mononoki Nerd Font Mono`. |
 | **1.28** | 20/07/2026 | Antigravity | Adição de camada de proteção de Rate Limit (máximo 300 eventos/minuto por IP) para o Web Terminal (`terminal.evolucsia.com` / `webpi.evolucsia.com`). |
 | **1.27** | 20/07/2026 | Antigravity | Atualização do hash bcrypt no Caddy (`caddy hash-password`), liberando a autenticação por senha unificada (`Dt32btop@`) para `webpi.evolucsia.com` e `terminal.evolucsia.com`. |
