@@ -1,10 +1,8 @@
 # OpenCode Native — ocweb.evolucsia.com
-# Imagem real: rblvxrpir3b3ydpxi7qg1czh:latest
-# Container atual: rblvxrpir3b3ydpxi7qg1czh-003849583999
 # Portas internas: 4096 (web), 8080 (serve) — sem exposição externa, só via Caddy
 services:
   opencode-native:
-    image: rblvxrpir3b3ydpxi7qg1czh:latest
+    image: opencode-native:latest
     container_name: opencode-native
     restart: unless-stopped
     volumes:
@@ -16,6 +14,12 @@ services:
       - OMO_MODE=native
       - OPENCODE_SERVER_HOSTNAME=0.0.0.0
       - MISE_YES=1
+      - OPENAI_API_BASE=http://9router:20128/v1
+      - OPENAI_API_KEY=sk-9router-E8EDDFB8B2B3377CC5C21390809BF40E
+      - ANTHROPIC_BASE_URL=http://9router:20128/v1
+      - ANTHROPIC_API_KEY=sk-9router-E8EDDFB8B2B3377CC5C21390809BF40E
+      - GOOGLE_GENERATIVE_AI_BASE_URL=http://9router:20128/v1
+      - GOOGLE_API_KEY=sk-9router-E8EDDFB8B2B3377CC5C21390809BF40E
     networks:
       - web
     labels:
