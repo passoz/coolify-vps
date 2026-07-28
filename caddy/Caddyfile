@@ -90,9 +90,12 @@ odysseus.evolucsia.com {
     encode gzip zstd
 }
 
-# ── WebPI ─────────────────────────────────────────────
-webpi.evolucsia.com {
-    reverse_proxy webpi:3000
+# ── Web Terminal SSH (ttyd for passoz) ───────────────
+terminal.evolucsia.com, webpi.evolucsia.com {
+    basicauth {
+        passoz $2y$10$y7mXbAIE7MYt9huCMH7Xu.8a65bNuHcoJn/FB32H8TsQwn6mBV2Vq
+    }
+    reverse_proxy 10.0.4.1:7681
     encode gzip zstd
 }
 
