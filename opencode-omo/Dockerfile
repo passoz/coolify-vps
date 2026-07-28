@@ -41,7 +41,10 @@ RUN mkdir -p /workspace
 EXPOSE 4096 8080
 
 CMD ["/usr/bin/tini", "--", "sh", "-c", "\
-    if [ ! -x /root/.local/bin/mise ]; then cp -a /image-root/. /root/; fi; \
+    cp -a /image-root/.local/bin/mise /root/.local/bin/mise; \
+    cp -a /image-root/.local/share/mise /root/.local/share/mise 2>/dev/null || true; \
+    mkdir -p /root/.config/mise; \
+    cp /image-root/.config/mise/config.toml /root/.config/mise/config.toml 2>/dev/null || true; \
     export PATH=\"/root/.local/bin:/root/.local/share/mise/shims:$PATH\"; \
     eval \"$(/root/.local/bin/mise activate sh)\"; \
     /root/.local/bin/mise install; \

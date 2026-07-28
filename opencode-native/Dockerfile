@@ -1,16 +1,11 @@
-# OpenCode — Ambiente de desenvolvimento com mise + OpenCode + OMO
-# Imagem atual: g2wbydtk0e5pm8ogd41xhbjf:latest (opencode-omo)
-#                rblvxrpir3b3ydpxi7qg1czh:latest (opencode-native)
-#
-# Build:
-#   Para OMO:  docker build --build-arg OMO_MODE=omo-full -t opencode-omo .
-#   Para Native: docker build --build-arg OMO_MODE=native -t opencode-native .
+# OpenCode Native — ocweb.evolucsia.com
+# Portas internas: 4096 (web), 8080 (serve) — sem exposição externa, só via Caddy
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV OPENCODE_SERVER_HOSTNAME=0.0.0.0
 ENV MISE_YES=1
-ENV OMO_MODE=omo-full
+ENV OMO_MODE=native
 ENV PATH=/root/.local/bin:/root/.local/share/mise/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ARG OPENCODE_GH_TOKEN
@@ -41,7 +36,10 @@ RUN mkdir -p /workspace
 EXPOSE 4096 8080
 
 CMD ["/usr/bin/tini", "--", "sh", "-c", "\
-    if [ ! -x /root/.local/bin/mise ]; then cp -a /image-root/. /root/; fi; \
+    cp -a /image-root/.local/bin/mise /root/.local/bin/mise; \
+    cp -a /image-root/.local/share/mise /root/.local/share/mise 2>/dev/null || true; \
+    mkdir -p /root/.config/mise; \
+    cp /image-root/.config/mise/config.toml /root/.config/mise/config.toml 2>/dev/null || true; \
     export PATH=\"/root/.local/bin:/root/.local/share/mise/shims:$PATH\"; \
     eval \"$(/root/.local/bin/mise activate sh)\"; \
     /root/.local/bin/mise install; \
