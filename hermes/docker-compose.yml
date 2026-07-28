@@ -22,6 +22,10 @@ services:
       - HERMES_WORKSPACE_DIR=/root/workspace
       - HERMES_CONTEXT_DIR=/root/context
       - HERMES_ALLOW_ROOT_GATEWAY=1
+      - HOME_ASSISTANT_URL=http://home-assistant:8123
+      - CALDAV_URL=https://calendar.evolucsia.com/passoz/
+      - CALDAV_USER=passoz
+      - CALDAV_PASS=Dt32btop@
     networks:
       - web
     labels:
