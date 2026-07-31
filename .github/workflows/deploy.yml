@@ -10,37 +10,53 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to VPS
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: 129.213.26.227
-          username: passoz
-          key: ${{ secrets.VPS_SSH_KEY }}
-          fingerprint: SHA256:bBr2VklXR/6vHNT1ft8F7uabv7282IrGrFNa8+tLr54
-          command_timeout: "10m"
-          script: |
-            set -euo pipefail
+        env:
+          VPS_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          set -euo pipefail
 
-            REPO=/home/ubuntu/vps
+          HOST=129.213.26.227
+          USER=passoz
 
-            # 1) Atualiza o clone
-            before=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
-            sudo -u ubuntu git -C "$REPO" pull --ff-only
-            after=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
 
-            if [ "$before" = "$after" ]; then
-              echo "Nenhuma mudanca no repo."
-              exit 0
+          # Captura a host key real vista pelo runner (valida contra MITM)
+          ssh-keyscan -t ed25519 "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          chmod 644 ~/.ssh/known_hosts
+
+          echo "$VPS_KEY" > ~/.ssh/vps_deploy
+          chmod 600 ~/.ssh/vps_deploy
+
+          ssh -i ~/.ssh/vps_deploy \
+              -o StrictHostKeyChecking=yes \
+              -o UserKnownHostsFile=~/.ssh/known_hosts \
+              -o ConnectTimeout=20 \
+              "$USER@$HOST" 'bash -s' <<'DEPLOY'
+          set -euo pipefail
+
+          REPO=/home/ubuntu/vps
+
+          # 1) Atualiza o clone
+          before=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
+          sudo -u ubuntu git -C "$REPO" pull --ff-only
+          after=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
+
+          if [ "$before" = "$after" ]; then
+            echo "Nenhuma mudanca no repo."
+            exit 0
+          fi
+
+          echo "HEAD: $before -> $after"
+
+          # 2) Recria containers dos servicos cujos diretorios mudaram
+          changed=$(sudo -u ubuntu git -C "$REPO" diff --name-only "$before" "$after" | cut -d/ -f1 | sort -u)
+          echo "Diretorios alterados: ${changed:-nenhum}"
+
+          for d in $changed; do
+            if [ -f "$REPO/$d/docker-compose.yml" ]; then
+              echo "==> docker compose up -d --build: $d"
+              sudo sh -lc "cd '$REPO/$d' && docker compose up -d --build"
             fi
-
-            echo "HEAD: $before -> $after"
-
-            # 2) Recria containers dos servicos cujos diretorios mudaram
-            changed=$(sudo -u ubuntu git -C "$REPO" diff --name-only "$before" "$after" | cut -d/ -f1 | sort -u)
-            echo "Diretorios alterados: ${changed:-nenhum}"
-
-            for d in $changed; do
-              if [ -f "$REPO/$d/docker-compose.yml" ]; then
-                echo "==> docker compose up -d --build: $d"
-                sudo sh -lc "cd '$REPO/$d' && docker compose up -d --build"
-              fi
-            done
+          done
+          DEPLOY
