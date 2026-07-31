@@ -1,0 +1,46 @@
+name: deploy
+
+on:
+  push:
+    branches: [main, release]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 129.213.26.227
+          username: passoz
+          key: ${{ secrets.VPS_SSH_KEY }}
+          fingerprint: SHA256:FMJhrmmObP2NG/WjUF1na6gBwZ7HUmJCEgFdnu8F7Vk
+          command_timeout: "10m"
+          script: |
+            set -euo pipefail
+
+            REPO=/home/ubuntu/vps
+
+            # 1) Atualiza o clone
+            before=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
+            sudo -u ubuntu git -C "$REPO" pull --ff-only
+            after=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
+
+            if [ "$before" = "$after" ]; then
+              echo "Nenhuma mudanca no repo."
+              exit 0
+            fi
+
+            echo "HEAD: $before -> $after"
+
+            # 2) Recria containers dos servicos cujos diretorios mudaram
+            changed=$(sudo -u ubuntu git -C "$REPO" diff --name-only "$before" "$after" | cut -d/ -f1 | sort -u)
+            echo "Diretorios alterados: ${changed:-nenhum}"
+
+            for d in $changed; do
+              if [ -f "$REPO/$d/docker-compose.yml" ]; then
+                echo "==> docker compose up -d --build: $d"
+                sudo sh -lc "cd '$REPO/$d' && docker compose up -d --build"
+              fi
+            done
