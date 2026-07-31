@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install 9router CLI globally
-RUN npm install -g 9router
+RUN npm install -g 9router@0.5.45
 
 ENV HOME=/root
 EXPOSE 20128

@@ -22,6 +22,7 @@ services:
       - HERMES_WORKSPACE_DIR=/root/workspace
       - HERMES_CONTEXT_DIR=/root/context
       - HERMES_ALLOW_ROOT_GATEWAY=1
+      - NINEROUTER_BASE_URL=http://9router:20128/v1
       - HOME_ASSISTANT_URL=http://home-assistant:8123
       - HOME_ASSISTANT_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmZDc5MmMyYTdmOWU0N2Y3OGU1MGQwZjc0YzNkMzQ1NSIsInN1YiI6IjMyN2JhMTQ3YWZlNTQ1NDE4MTZkODFkMzk3MmNmZDIwIiwiaWF0IjoxNzg1MjU2NTIxLCJleHAiOjIxMDA2MTY1MjF9.0BkfS0AmjzoWjZvUSLN2aQPtNmt3BLLqroUHPIcbsgI
       - CALDAV_URL=https://calendar.evolucsia.com/passoz/
