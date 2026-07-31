@@ -15,7 +15,7 @@ jobs:
           host: 129.213.26.227
           username: passoz
           key: ${{ secrets.VPS_SSH_KEY }}
-          fingerprint: SHA256:OvDGfawdd+AQFXJp8+j9L3UVDBLF2A43fEwALTI7+oE
+          fingerprint: SHA256:bBr2VklXR/6vHNT1ft8F7uabv7282IrGrFNa8+tLr54
           command_timeout: "10m"
           script: |
             set -euo pipefail
