@@ -32,14 +32,16 @@ jobs:
               -o StrictHostKeyChecking=yes \
               -o UserKnownHostsFile=~/.ssh/known_hosts \
               -o ConnectTimeout=20 \
-              "$USER@$HOST" 'bash -s' <<'DEPLOY'
+              "$USER@$HOST" 'bash -s' "${{ github.ref_name }}" <<'DEPLOY'
           set -euo pipefail
 
           REPO=/home/ubuntu/vps
+          BRANCH=$1
 
-          # 1) Atualiza o clone
+          # 1) Atualiza o clone (espelho do repo — descarta mudancas locais rastreadas)
           before=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
-          sudo -u ubuntu git -C "$REPO" pull --ff-only
+          sudo -u ubuntu git -C "$REPO" fetch origin
+          sudo -u ubuntu git -C "$REPO" reset --hard "origin/$BRANCH"
           after=$(sudo -u ubuntu git -C "$REPO" rev-parse HEAD)
 
           if [ "$before" = "$after" ]; then
