@@ -1,0 +1,31 @@
+# Hermes + Hermes WebUI (nesquena) embutido na imagem
+# Base: imagem atual do hermes (agente v0.17.0) — NÃO altera o agente
+FROM ghcr.io/passoz/hermes:latest
+
+USER root
+
+# git para o clone do WebUI (garantia)
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+
+# Install uv (gerenciador de venv do WebUI)
+RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh
+
+# Clone WebUI (tag pinada v0.52.106)
+RUN rm -rf /opt/hermes-webui && git clone --depth 1 --branch v0.52.106 https://github.com/nesquena/hermes-webui.git /opt/hermes-webui
+
+# Venv do WebUI + dependencias do WebUI + agente (mesmo /opt/hermes v0.17.0, zero drift)
+# Deps do WebUI no MESMO venv do hermes (agente v0.17.0 real — site-packages do venv)
+RUN /usr/local/bin/uv pip install --python /opt/hermes/.venv/bin/python -r /opt/hermes-webui/requirements.txt
+
+# Env defaults do WebUI
+ENV HERMES_WEBUI_HOST=0.0.0.0 \
+    HERMES_WEBUI_PORT=8787 \
+    HERMES_WEBUI_STATE_DIR=/root/.hermes/webui
+
+EXPOSE 8787
+
+# Entrypoint estendido (gateway + dashboard + sshd + webui)
+COPY scripts/hermes-entrypoint-webui.sh /usr/local/bin/hermes-entrypoint.sh
+RUN chmod +x /usr/local/bin/hermes-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/hermes-entrypoint.sh"]
