@@ -10,7 +10,7 @@ services:
     ports:
       - "2222:22"
       - "9119:9119"
-      - "127.0.0.1:8787:8787"
+      - "0.0.0.0:8787:8787"
     volumes:
       - hermes-state:/root/.hermes
       - hermes-workspace:/root/workspace
